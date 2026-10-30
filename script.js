@@ -1,11 +1,12 @@
 /*
  * KCL Printing & Photocopy Shop
- * Commit 3: GSAP Animations and Scroll Effects
+ * Commit 4: Final Refinements
  *
  * Features:
  * - Light and dark mode toggle
  * - Mobile navigation menu
  * - GSAP hero intro timeline
+ * - Individually staggered hero buttons
  * - Replay intro button
  * - ScrollTrigger section and card reveals
  * - Scroll progress bar
@@ -13,17 +14,17 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    // =========================================
+    // THEME TOGGLE
+    // =========================================
 
     const themeToggle = document.getElementById("darkModeToggle");
     const mobileThemeToggle = document.getElementById("mobileThemeToggle");
-
     const themeIcon = document.getElementById("themeIcon");
     const mobileThemeIcon = document.getElementById("mobileThemeIcon");
 
     const updateThemeButtons = () => {
         const isDark = document.documentElement.classList.contains("dark");
-
         const label = isDark ? "Light" : "Dark";
         const ariaLabel = isDark
             ? "Switch to light mode"
@@ -46,7 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateThemeButtons();
 
-
+    // =========================================
+    // MOBILE NAVIGATION
+    // =========================================
 
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
@@ -54,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closeMobileMenu = () => {
         mobileMenu?.classList.add("hidden");
-
         menuToggle?.setAttribute("aria-expanded", "false");
 
         if (menuIcon) {
@@ -70,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
             closeMobileMenu();
         } else {
             mobileMenu?.classList.remove("hidden");
-
             menuToggle.setAttribute("aria-expanded", "true");
 
             if (menuIcon) {
@@ -79,17 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Close the mobile menu after selecting a navigation link.
     mobileMenu?.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", closeMobileMenu);
     });
 
-    // Close the mobile menu when switching to desktop width.
     window.addEventListener("resize", () => {
         if (window.innerWidth >= 768) {
             closeMobileMenu();
         }
     });
+
+    // =========================================
+    // FAQ ACCORDION
+    // =========================================
 
     const faqItems = document.querySelectorAll(".faq-item");
 
@@ -97,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener("toggle", () => {
             if (!item.open) return;
 
-            // Keep only one FAQ answer open at a time.
             faqItems.forEach((otherItem) => {
                 if (otherItem !== item) {
                     otherItem.open = false;
@@ -106,18 +108,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // =========================================
+    // GSAP AVAILABILITY CHECK
+    // =========================================
+
+    const progressBar = document.getElementById("progressBar");
 
     if (
         typeof gsap === "undefined" ||
         typeof ScrollTrigger === "undefined"
     ) {
-        // Keep all content visible if GSAP fails to load.
         document.querySelectorAll(".reveal").forEach((element) => {
             element.style.opacity = "1";
             element.style.visibility = "visible";
         });
-
-        const progressBar = document.getElementById("progressBar");
 
         if (progressBar) {
             progressBar.style.transform = "scaleX(1)";
@@ -128,7 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.registerPlugin(ScrollTrigger);
 
-
+    // =========================================
+    // HERO ELEMENTS
+    // =========================================
 
     const heroElements = [
         "#heroLabel",
@@ -138,62 +144,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "#heroVisual"
     ];
 
-    // Set the starting position of the hero elements.
-    gsap.set(heroElements, {
-        autoAlpha: 0,
-        y: 24
-    });
-
-    // Create one timeline for the complete hero introduction.
-    const introTimeline = gsap.timeline({
-        defaults: {
-            duration: 0.55,
-            ease: "power2.out"
-            // Smoothly eases each element into place.
-        }
-    });
-
-    introTimeline
-        .to("#heroLabel", {
-            autoAlpha: 1,
-            y: 0
-        })
-
-        .to("#heroTitle", {
-            autoAlpha: 1,
-            y: 0
-        }, "-=0.28")
-
-        .to("#heroDescription", {
-            autoAlpha: 1,
-            y: 0
-        }, "-=0.28")
-
-        .to("#heroButtons", {
-            autoAlpha: 1,
-            y: 0,
-            stagger: 0.12
-        }, "-=0.22")
-
-        .to("#heroVisual", {
-            autoAlpha: 1,
-            y: 0
-        }, "-=0.28");
-
-
-    // =========================================
-    // REPLAY INTRO BUTTON
-    // =========================================
-
     const replayBtn = document.getElementById("replayBtn");
 
-    replayBtn?.addEventListener("click", () => {
-        introTimeline.restart();
-    });
-
-
     // =========================================
-    // SCROLL REVEALS AND REDUCED MOTION
+    // REDUCED-MOTION SUPPORT
     // =========================================
 
     const motionSettings = gsap.matchMedia();
@@ -203,57 +157,122 @@ document.addEventListener("DOMContentLoaded", () => {
             reduceMotion: "(prefers-reduced-motion: reduce)",
             normalMotion: "(prefers-reduced-motion: no-preference)"
         },
-
         (context) => {
-
             const { reduceMotion } = context.conditions;
 
-            // Show all content immediately if reduced motion is preferred.
+            // Display everything without animation when reduced motion is enabled.
             if (reduceMotion) {
-
-                gsap.set(".reveal", {
-                    clearProps: "all",
-                    autoAlpha: 1,
-                    y: 0
-                });
+                gsap.set(
+                    [...heroElements, ".reveal"],
+                    {
+                        clearProps: "all",
+                        autoAlpha: 1,
+                        y: 0
+                    }
+                );
 
                 gsap.set("#progressBar", {
                     scaleX: 1
                 });
 
-                gsap.set(heroElements, {
-                    clearProps: "all",
-                    autoAlpha: 1,
-                    y: 0
-                });
-
-                introTimeline.pause(0);
+                if (replayBtn) {
+                    replayBtn.disabled = true;
+                    replayBtn.setAttribute(
+                        "aria-label",
+                        "Introduction animation is disabled because reduced motion is enabled"
+                    );
+                    replayBtn.classList.add("opacity-50", "cursor-not-allowed");
+                }
 
                 return;
             }
 
+            // =====================================
+            // HERO INTRO TIMELINE
+            // =====================================
+
+            gsap.set(heroElements, {
+                autoAlpha: 0,
+                y: 24
+            });
+
+            const introTimeline = gsap.timeline({
+                defaults: {
+                    duration: 0.5,
+                    ease: "power2.out"
+                    // Smoothly eases each hero element into place.
+                }
+            });
+
+            introTimeline
+                .to("#heroLabel", {
+                    autoAlpha: 1,
+                    y: 0
+                })
+                .to(
+                    "#heroTitle",
+                    {
+                        autoAlpha: 1,
+                        y: 0
+                    },
+                    "-=0.25"
+                )
+                .to(
+                    "#heroDescription",
+                    {
+                        autoAlpha: 1,
+                        y: 0
+                    },
+                    "-=0.25"
+                )
+                .to(
+                    "#heroButtons",
+                    {
+                        autoAlpha: 1,
+                        y: 0
+                    },
+                    "-=0.2"
+                )
+                .to(
+                    "#heroButtons a",
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        stagger: 0.12
+                    },
+                    "<"
+                )
+                .to(
+                    "#heroVisual",
+                    {
+                        autoAlpha: 1,
+                        y: 0
+                    },
+                    "-=0.2"
+                );
+
+            // Replay the complete hero introduction.
+            replayBtn?.addEventListener("click", () => {
+                introTimeline.restart();
+            });
 
             // =====================================
-            // SECTION REVEAL ANIMATIONS
+            // SCROLL REVEAL ANIMATIONS
             // =====================================
 
-            // Give every reveal element its own ScrollTrigger.
             gsap.utils.toArray(".reveal").forEach((element) => {
-
                 gsap.fromTo(
                     element,
-
                     {
                         autoAlpha: 0,
                         y: 32
                     },
-
                     {
                         autoAlpha: 1,
                         y: 0,
                         duration: 0.7,
                         ease: "power2.out",
-                        // Gives the reveal a soft, natural finish.
+                        // Gives each reveal a soft, natural finish.
 
                         scrollTrigger: {
                             trigger: element,
@@ -262,9 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
                 );
-
             });
 
+            // =====================================
+            // SCROLL PROGRESS BAR
+            // =====================================
 
             gsap.to("#progressBar", {
                 scaleX: 1,
@@ -277,8 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     scrub: true
                 }
             });
-
         }
     );
-
 });
