@@ -1,6 +1,6 @@
 # KCL Printing & Photocopy Shop
 
-**Live site:** Not deployed yet
+Live site: https://c20245709lozano-debug.github.io/midterm-printing-shop/
 
 **GitHub repository:** https://github.com/c20245709lozano-debug/midterm-printing-shop
 
