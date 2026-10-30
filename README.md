@@ -27,20 +27,19 @@ KCL Printing & Photocopy Shop is a responsive website designed to introduce the 
 
 Body text color vs. background color: `#34495E` on `#DCEBFA`
 
-Contrast ratio: To be verified : 1 (needs to be at least 4.5 : 1)
+Contrast ratio: 7.66 : 1 (needs to be at least 4.5 : 1)
 
-Tool used: WebAIM Contrast Checker (https://webaim.org/resources/contrastchecker/)
+Tool used: WebAIM Contrast Checker
 
 ## Features
 
 - [x] Mobile-first responsive layout
 - [x] Dark mode toggle
-- [ ] Page-load intro animation (GSAP timeline)
-- [ ] Scroll reveals on every section below the hero (ScrollTrigger)
-- [ ] Scroll progress bar (scrub)
-- [ ] Reduced-motion support
+- [x] Page-load intro animation (GSAP timeline)
+- [x] Scroll reveals on every section below the hero (ScrollTrigger)
+- [x] Scroll progress bar (scrub)
+- [x] Reduced-motion support
 
 ## Built With
 
-HTML, Tailwind CSS v4, JavaScript
-
+HTML, Tailwind CSS v4, JavaScript, GSAP 3.13.0, ScrollTrigger 3.13.0
