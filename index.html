@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KCL Printing and Photocopy Shop offers reliable printing, photocopying, and document services.">
+    <title>KCL Printing & Photocopy Shop</title>
+
+    <!-- Tailwind CSS v4 Browser CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        /* =========================================
+           KCL DESIGN TOKENS
+           60% Pastel Blue | 30% Pastel Pink | 10% Pastel Yellow
+        ========================================= */
+
+        @theme {
+            --color-kcl-blue: #DCEBFA;
+            --color-kcl-pink: #F8DDE8;
+            --color-kcl-yellow: #FFF0B8;
+            --color-kcl-heading: #243B53;
+            --color-kcl-text: #34495E;
+            --color-kcl-white: #FFFFFF;
+        }
+
+        /* =========================================
+           REUSABLE COMPONENT CLASSES
+        ========================================= */
+
+        @layer components {
+            .btn-primary {
+                @apply inline-flex items-center justify-center rounded-full bg-kcl-heading px-6 py-3 text-sm font-semibold text-white shadow-md;
+            }
+
+            .btn-secondary {
+                @apply inline-flex items-center justify-center rounded-full border-2 border-kcl-heading px-6 py-3 text-sm font-semibold text-kcl-heading;
+            }
+
+            .content-card {
+                @apply rounded-2xl border border-white/70 bg-white p-6 shadow-sm;
+            }
+
+            .section-title {
+                @apply mb-4 text-3xl font-bold tracking-tight text-kcl-heading md:text-4xl;
+            }
+        }
+
+        /* =========================================
+           BASE STYLES
+        ========================================= */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--color-kcl-text);
+        }
+
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-kcl-blue text-kcl-text">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="border-b border-white/60 bg-kcl-blue">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+
+            <a href="#home" class="flex items-center gap-3" aria-label="KCL home">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-kcl-heading text-lg font-bold text-white">
+                    KCL
+                </div>
+                <div>
+                    <p class="font-bold leading-tight text-kcl-heading">KCL Printing</p>
+                    <p class="text-xs text-kcl-text"> & Photocopy Shop</p>
+                </div>
+            </a>
+
+            <div class="hidden items-center gap-8 md:flex">
+                <a href="#home" class="text-sm font-semibold text-kcl-heading">Home</a>
+                <a href="#services" class="text-sm font-medium hover:text-kcl-heading">Services</a>
+                <a href="#about" class="text-sm font-medium hover:text-kcl-heading">About</a>
+                <a href="#contact" class="text-sm font-medium hover:text-kcl-heading">Contact</a>
+            </div>
+
+            <a href="#contact" class="btn-primary hidden md:inline-flex">
+                Get in Touch
+            </a>
+
+            <!-- Static mobile navigation for Commit 1 -->
+            <a href="#services" class="text-sm font-semibold text-kcl-heading md:hidden">
+                Explore Services
+            </a>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="section-padding">
+            <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:px-10">
+
+                <div>
+                    <span class="mb-5 inline-block rounded-full bg-kcl-yellow px-4 py-2 text-xs font-bold uppercase tracking-widest text-kcl-heading">
+                        Your Everyday Printing Partner
+                    </span>
+
+                    <h1 class="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-kcl-heading sm:text-5xl lg:text-6xl">
+                        Bringing Your
+                        <span class="block">Ideas to Print.</span>
+                    </h1>
+
+                    <p class="mb-8 max-w-xl text-base leading-8 text-kcl-text md:text-lg">
+                        From school requirements to everyday documents,
+                        KCL Printing & Photocopy Shop is here to make your
+                        printing needs easier, faster, and more convenient.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#services" class="btn-primary">
+                            Explore Our Services
+                        </a>
+
+                        <a href="#about" class="btn-secondary">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="rounded-3xl bg-kcl-pink p-6 md:p-10">
+                        <div class="rounded-2xl bg-white p-6 shadow-sm md:p-8">
+
+                            <div class="mb-6 flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-semibold text-kcl-heading">KCL Printing</p>
+                                    <p class="text-xs text-kcl-text">Quality in Every Page</p>
+                                </div>
+                                <div class="rounded-xl bg-kcl-yellow px-3 py-2 text-xs font-bold text-kcl-heading">
+                                    PRINT
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="rounded-xl bg-kcl-blue p-5">
+                                    <p class="mb-2 text-xs font-bold uppercase tracking-widest text-kcl-heading">
+                                        Print
+                                    </p>
+                                    <div class="h-2 w-3/4 rounded-full bg-kcl-heading/20"></div>
+                                    <div class="mt-3 h-2 w-1/2 rounded-full bg-kcl-heading/20"></div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="rounded-xl bg-kcl-yellow p-5">
+                                        <p class="text-sm font-bold text-kcl-heading">Copy</p>
+                                        <p class="mt-2 text-xs text-kcl-text">Clear documents</p>
+                                    </div>
+                                    <div class="rounded-xl bg-kcl-pink p-5">
+                                        <p class="text-sm font-bold text-kcl-heading">Create</p>
+                                        <p class="mt-2 text-xs text-kcl-text">Printed projects</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="mt-6 text-center text-sm font-semibold text-kcl-heading">
+                                Simple. Reliable. Convenient.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="section-padding bg-kcl-pink">
+            <div class="mx-auto max-w-7xl px-6 lg:px-10">
+
+                <div class="mx-auto mb-14 max-w-2xl text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-kcl-heading">
+                        What We Offer
+                    </span>
+                    <h2 class="section-title mt-3">Our Services</h2>
+                    <p class="leading-7 text-kcl-text">
+                        Practical printing solutions for students, professionals,
+                        and everyday customers.
+                    </p>
+                </div>
+
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-blue text-lg font-bold text-kcl-heading">
+                            01
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            Document Printing
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Printing for school activities, reports, forms,
+                            assignments, and other important documents.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-yellow text-lg font-bold text-kcl-heading">
+                            02
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            Photocopying
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Convenient document copying for personal,
+                            academic, and everyday requirements.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-pink text-lg font-bold text-kcl-heading">
+                            03
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            Document Services
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Assistance with preparing and organizing
+                            documents for printing.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-yellow text-lg font-bold text-kcl-heading">
+                            04
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            School Projects
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Printing support for school projects,
+                            presentations, and learning materials.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-blue text-lg font-bold text-kcl-heading">
+                            05
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            File Printing
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Printed copies of digital documents and
+                            files prepared for submission or reference.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-pink text-lg font-bold text-kcl-heading">
+                            06
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-kcl-heading">
+                            Everyday Printing
+                        </h3>
+                        <p class="leading-7 text-kcl-text">
+                            Helpful printing solutions for personal
+                            documents and daily needs.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section-padding">
+            <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:px-10">
+
+                <div class="rounded-3xl bg-kcl-yellow p-8 md:p-12">
+                    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-kcl-heading">
+                        About KCL
+                    </p>
+                    <h2 class="text-3xl font-extrabold leading-tight text-kcl-heading md:text-4xl">
+                        Making Everyday Printing More Convenient
+                    </h2>
+                    <div class="mt-6 h-1 w-20 rounded-full bg-kcl-heading"></div>
+                </div>
+
+                <div>
+                    <h2 class="section-title">Who We Are</h2>
+                    <p class="mb-5 leading-8 text-kcl-text">
+                        KCL Printing & Photocopy Shop aims to provide convenient
+                        printing and photocopying services for people who need
+                        reliable document solutions.
+                    </p>
+                    <p class="leading-8 text-kcl-text">
+                        We value simplicity, accessibility, and quality in
+                        helping customers with their everyday printing needs.
+                        Whether it is for school, work, or personal use,
+                        we are ready to help bring documents to life.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section-padding bg-kcl-pink">
+            <div class="mx-auto max-w-7xl px-6 lg:px-10">
+
+                <div class="mx-auto mb-12 max-w-2xl text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-kcl-heading">
+                        Get Connected
+                    </span>
+                    <h2 class="section-title mt-3">Contact Us</h2>
+                    <p class="leading-7 text-kcl-text">
+                        Have a printing inquiry? Reach out to us through
+                        the available contact information.
+                    </p>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-3">
+
+                    <div class="content-card text-center">
+                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-blue font-bold text-kcl-heading">
+                            01
+                        </div>
+                        <h3 class="mb-2 font-bold text-kcl-heading">Location</h3>
+                        <p class="text-sm leading-6 text-kcl-text">
+                            Visit our shop at our business location.
+                        </p>
+                    </div>
+
+                    <div class="content-card text-center">
+                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-yellow font-bold text-kcl-heading">
+                            02
+                        </div>
+                        <h3 class="mb-2 font-bold text-kcl-heading">Phone</h3>
+                        <p class="text-sm leading-6 text-kcl-text">
+                            Contact us through our available phone number.
+                        </p>
+                    </div>
+
+                    <div class="content-card text-center">
+                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-kcl-pink font-bold text-kcl-heading">
+                            03
+                        </div>
+                        <h3 class="mb-2 font-bold text-kcl-heading">Business Hours</h3>
+                        <p class="text-sm leading-6 text-kcl-text">
+                            Ask us about our current shop schedule.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-10 rounded-3xl bg-kcl-blue p-8 text-center md:p-12">
+                    <h3 class="mb-3 text-2xl font-bold text-kcl-heading">
+                        Need Something Printed?
+                    </h3>
+                    <p class="mx-auto mb-6 max-w-xl leading-7 text-kcl-text">
+                        We are ready to assist with your everyday printing
+                        and photocopying needs.
+                    </p>
+                    <a href="#home" class="btn-primary">
+                        Back to Home
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-kcl-yellow">
+        <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-center md:flex-row md:text-left lg:px-10">
+
+            <div>
+                <p class="font-bold text-kcl-heading">
+                    KCL Printing & Photocopy Shop
+                </p>
+                <p class="mt-1 text-sm text-kcl-text">
+                    Your everyday printing partner.
+                </p>
+            </div>
+
+            <p class="text-sm text-kcl-text">
+                &copy; 2026 KCL Printing & Photocopy Shop. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+</html>
